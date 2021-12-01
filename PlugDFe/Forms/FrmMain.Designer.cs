@@ -36,7 +36,7 @@ namespace PlugDFe.Forms
             this.ColKeyTransferredDocument = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColIssueDateTransferredDocument = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExitApplication = new System.Windows.Forms.Button();
-            this.btnStartApplication = new System.Windows.Forms.Button();
+            this.btnExecuteApplication = new System.Windows.Forms.Button();
             this.btnShowFrmParameters = new System.Windows.Forms.Button();
             this.notifyIconApplication = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStripMain = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -81,27 +81,27 @@ namespace PlugDFe.Forms
             // 
             this.btnExitApplication.Location = new System.Drawing.Point(600, 60);
             this.btnExitApplication.Name = "btnExitApplication";
-            this.btnExitApplication.Size = new System.Drawing.Size(64, 21);
+            this.btnExitApplication.Size = new System.Drawing.Size(73, 21);
             this.btnExitApplication.TabIndex = 1;
             this.btnExitApplication.Text = "Sair";
             this.btnExitApplication.UseVisualStyleBackColor = true;
             this.btnExitApplication.Click += new System.EventHandler(this.btnExitApplication_Click);
             // 
-            // btnStartApplication
+            // btnExecuteApplication
             // 
-            this.btnStartApplication.Location = new System.Drawing.Point(600, 6);
-            this.btnStartApplication.Name = "btnStartApplication";
-            this.btnStartApplication.Size = new System.Drawing.Size(64, 21);
-            this.btnStartApplication.TabIndex = 2;
-            this.btnStartApplication.Text = "Iniciar";
-            this.btnStartApplication.UseVisualStyleBackColor = true;
-            this.btnStartApplication.Click += new System.EventHandler(this.btnStartApplication_Click);
+            this.btnExecuteApplication.Location = new System.Drawing.Point(600, 6);
+            this.btnExecuteApplication.Name = "btnExecuteApplication";
+            this.btnExecuteApplication.Size = new System.Drawing.Size(73, 21);
+            this.btnExecuteApplication.TabIndex = 2;
+            this.btnExecuteApplication.Text = "Executar";
+            this.btnExecuteApplication.UseVisualStyleBackColor = true;
+            this.btnExecuteApplication.Click += new System.EventHandler(this.btnExecuteApplication_Click);
             // 
             // btnShowFrmParameters
             // 
             this.btnShowFrmParameters.Location = new System.Drawing.Point(600, 33);
             this.btnShowFrmParameters.Name = "btnShowFrmParameters";
-            this.btnShowFrmParameters.Size = new System.Drawing.Size(64, 21);
+            this.btnShowFrmParameters.Size = new System.Drawing.Size(73, 21);
             this.btnShowFrmParameters.TabIndex = 3;
             this.btnShowFrmParameters.Text = "Parâmetros";
             this.btnShowFrmParameters.UseVisualStyleBackColor = true;
@@ -139,9 +139,9 @@ namespace PlugDFe.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(672, 352);
+            this.ClientSize = new System.Drawing.Size(678, 352);
             this.Controls.Add(this.btnShowFrmParameters);
-            this.Controls.Add(this.btnStartApplication);
+            this.Controls.Add(this.btnExecuteApplication);
             this.Controls.Add(this.btnExitApplication);
             this.Controls.Add(this.grdMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -162,7 +162,7 @@ namespace PlugDFe.Forms
 
         private DataGridView grdMain;
         private Button btnExitApplication;
-        private Button btnStartApplication;
+        private Button btnExecuteApplication;
         private Button btnShowFrmParameters;
         private NotifyIcon notifyIconApplication;
         private ContextMenuStrip contextMenuStripMain;

@@ -176,6 +176,7 @@
     <Compile Include="ApplicationLayer\UseCases\ActionCases\DeleteOldRecordsAction.cs" />
     <Compile Include="ApplicationLayer\UseCases\ActionCases\GenericAction.cs" />
     <Compile Include="ApplicationLayer\UseCases\ActionCases\SendLostFilesAndDeleteAction.cs" />
+    <Compile Include="ApplicationLayer\UseCases\ActionCases\SendLostFilesAndKeepAction.cs" />
     <Compile Include="ApplicationLayer\UseCases\ConfigCases\CreateConfig.cs" />
     <Compile Include="ApplicationLayer\UseCases\ConfigCases\ReadConfig.cs" />
     <Compile Include="ApplicationLayer\UseCases\ConnectViewerCases\ExecuteQuery.cs" />

@@ -31,14 +31,18 @@ namespace PlugDFe.ApplicationLayer.Services
             {
                 new SendLostFilesAndDeleteAction(plugUser, plugAddress, plugTask, connectViewer, transferredDocuments, communicationPlatform, transferredDocumentRepository).Execute();
             }
+            else if (plugTask.Action == EAction.ENVIAR_PERDIDOS_E_MANTER)
+            {
+                new SendLostFilesAndKeepAction(plugUser, plugAddress, plugTask, connectViewer, transferredDocuments, communicationPlatform, transferredDocumentRepository).Execute();
+            }
             else if (plugTask.Action == EAction.EXCLUIR_REGISTROS_VELHOS)
             {
-                new DeleteOldRecordsAction(transferredDocumentRepository);
+                new DeleteOldRecordsAction(transferredDocumentRepository).Execute();
             }
 
             plugTask.SetLastExecuteDate(lastExecuteDate);
             plugTaskRepository.Update(plugTask);
-            Logs.Write(plugUser.IdCompany, plugUser.UnitCode, $"Ação Executada - {plugTask.GetAction()} - {plugAddress.Path}", true); ;
+            Logs.Write(plugUser.IdCompany, $"Ação - {plugTask.GetAction()} - {plugAddress.Path}", true);
         }
     }
 }

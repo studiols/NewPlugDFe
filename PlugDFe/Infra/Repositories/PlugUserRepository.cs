@@ -3,6 +3,7 @@ using PlugDFe.Domain.Repositories;
 using PlugDFe.Infra.Database;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace PlugDFe.Infra.Repositories
 {
@@ -13,17 +14,15 @@ namespace PlugDFe.Infra.Repositories
         }      
         public void Save(PlugUser plugUser)
         {
-            SQL = "INSERT INTO plugusers (puser_idcompany, puser_unitcode, puser_email, puser_password) " +
+            SQL = "INSERT INTO plugusers (puser_idcompany, puser_email, puser_password) " +
                   "VALUES(" +
-                    "@IdCompany," +
-                    "@UnitCode," +
+                    "@IdCompany," +                    
                     "@Email," +
                     "@Password" +
                   ")";
 
             Dictionary<string, object> dBParameters = new Dictionary<string, object>();            
-            dBParameters.Add("@IdCompany", plugUser.IdCompany);
-            dBParameters.Add("@UnitCode", plugUser.UnitCode);
+            dBParameters.Add("@IdCompany", plugUser.IdCompany);            
             dBParameters.Add("@Email", plugUser.Email);
             dBParameters.Add("@Password", plugUser.Password);
 
@@ -36,16 +35,14 @@ namespace PlugDFe.Infra.Repositories
         {
             SQL = "UPDATE plugusers " +
                   "SET " +
-                    "puser_idcompany = @IdCompany, " +
-                    "puser_unitcode = @UnitCode, " +
+                    "puser_idcompany = @IdCompany, " +                    
                     "puser_email = @Email, " +
                     "puser_password = @Password " +
                   "WHERE puser_id = @Id";
 
             Dictionary<string, object> dBParameters = new Dictionary<string, object>();
             dBParameters.Add("@Id", plugUser.Id);
-            dBParameters.Add("@IdCompany", plugUser.IdCompany);
-            dBParameters.Add("@UnitCode", plugUser.UnitCode);
+            dBParameters.Add("@IdCompany", plugUser.IdCompany);            
             dBParameters.Add("@Email", plugUser.Email);
             dBParameters.Add("@Password", plugUser.Password);
 
@@ -76,10 +73,34 @@ namespace PlugDFe.Infra.Repositories
 
         public void Delete(int id)
         {
-            SQL = "DELETE FROM plugusers " +
-                  "WHERE puser_id = " + id;
+            SQL = "SELECT paddr_id FROM plugadresses " +
+                  "WHERE paddr_puser_id = " + id;
 
             DatabaseConnection.OpenConnection();
+            DataTable dt =  DatabaseConnection.Query(SQL);
+            int idPlugAddress;
+
+            if (dt.Rows.Count > 0)
+            {
+                SQL = "DELETE FROM plugadresses " +
+                          "WHERE paddr_puser_id = " + id;
+
+                DatabaseConnection.Command(SQL);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    idPlugAddress = Convert.ToInt32(dr["paddr_id"]);
+                    
+                    SQL = "DELETE FROM plugtasks " +
+                         "WHERE ptask_paddr_id = " + idPlugAddress;
+
+                    DatabaseConnection.Command(SQL);
+                }
+            }
+            
+            SQL = "DELETE FROM plugusers " +
+                  "WHERE puser_id = " + id;
+            
             DatabaseConnection.Command(SQL);
             DatabaseConnection.CloseConnection();
         }

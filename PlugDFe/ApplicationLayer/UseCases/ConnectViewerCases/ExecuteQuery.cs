@@ -33,13 +33,13 @@ namespace PlugDFe.ApplicationLayer.UseCases.ConnectViewerCases
             }
 
             if (input.Command.IndexOf("[INITIAL_DATE]") >= 0)            
-                input.Command = input.Command.Replace("[INITIAL_DATE]", input.InitialDate.ToString("yyyy-MM-dd"));
+                input.Command = input.Command.Replace("[INITIAL_DATE]", input.InitialDate);
 
             if (input.Command.IndexOf("[FINAL_DATE]") >= 0)
-                input.Command = input.Command.Replace("[FINAL_DATE]", input.InitialDate.ToString("yyyy-MM-dd"));
+                input.Command = input.Command.Replace("[FINAL_DATE]", input.InitialDate);
 
-            if (input.Command.IndexOf("[TRANSFERRED_KEYS]") >= 0)
-                input.Command = input.Command.Replace("[TRANSFERRED_KEYS]", input.TransferredKeys);
+            if (input.Command.IndexOf("[KEYS]") >= 0)
+                input.Command = input.Command.Replace("[KEYS]", input.TransferredKeys);
 
             System.Windows.Forms.Clipboard.SetText(input.Command); //CTRL+C
 

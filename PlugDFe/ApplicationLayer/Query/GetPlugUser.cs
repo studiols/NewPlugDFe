@@ -35,12 +35,14 @@ namespace PlugDFe.ApplicationLayer.Query
                 plugUser = new PlugUser(
                     dr["puser_email"].ToString(),
                     dr["puser_password"].ToString(),
-                    Convert.ToInt32(dr["puser_idcompany"]),
-                    dr["puser_unitcode"].ToString()
+                    Convert.ToInt32(dr["puser_idcompany"])                    
                 );
 
                 plugUser.SetId(Convert.ToInt32(dr["puser_id"]));
 
+                if (!string.IsNullOrEmpty(dr["puser_token"].ToString()))                
+                    plugUser.SetToken(dr["puser_token"].ToString());
+                
                 plugUsers.Add(plugUser);
             }
 
@@ -64,11 +66,13 @@ namespace PlugDFe.ApplicationLayer.Query
             plugUser = new PlugUser(
                 dt.Rows[0]["puser_email"].ToString(),
                 dt.Rows[0]["puser_password"].ToString(),
-                Convert.ToInt32(dt.Rows[0]["puser_idcompany"]),
-                dt.Rows[0]["puser_unitcode"].ToString()
+                Convert.ToInt32(dt.Rows[0]["puser_idcompany"])                
             );
 
             plugUser.SetId(Convert.ToInt32(dt.Rows[0]["puser_id"]));
+
+            if (!string.IsNullOrEmpty(dt.Rows[0]["puser_token"].ToString()))
+                plugUser.SetToken(dt.Rows[0]["puser_token"].ToString());
 
             return plugUser;
         }

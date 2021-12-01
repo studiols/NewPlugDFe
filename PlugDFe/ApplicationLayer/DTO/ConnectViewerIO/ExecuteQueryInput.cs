@@ -20,16 +20,16 @@ namespace PlugDFe.ApplicationLayer.DTO.ConnectViewerIO
         public string Str { get;  set; }
         public string Command { get;  set; }
         public string ArgUnit { get;  set; }
-        public DateTime InitialDate { get; private set; }
-        public DateTime FinalDate { get; private set; }
+        public string InitialDate { get; private set; }
+        public string FinalDate { get; private set; }
         public string TransferredKeys { get; private set; }
 
-        public void AddInitialDate(DateTime initialDate)
+        public void AddInitialDate(string initialDate)
         {
             InitialDate = initialDate;
         }
 
-        public void AddFinalDate(DateTime finalDate)
+        public void AddFinalDate(string finalDate)
         {
             FinalDate = finalDate;
         }

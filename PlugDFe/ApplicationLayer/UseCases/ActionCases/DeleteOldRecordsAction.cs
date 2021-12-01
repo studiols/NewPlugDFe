@@ -15,7 +15,8 @@ namespace PlugDFe.ApplicationLayer.UseCases.ActionCases
 
         public void Execute()
         {
-            TransferredDocumentRepository.Delete(DateTime.Now.AddDays(-30));
+            DateTime dateTime = DateTime.Now.AddDays(-35);
+            TransferredDocumentRepository.Delete(dateTime);
         }
     }
 }

@@ -52,10 +52,15 @@ namespace PlugDFe.Infra.Repositories
 
         public void Delete(int id)
         {
-            SQL = "DELETE FROM plugadresses " +
-                  "WHERE paddr_id = " + id;
+            SQL = "DELETE FROM plugtasks " +
+                  "WHERE ptask_paddr_id = " + id;
 
             DatabaseConnection.OpenConnection();
+            DatabaseConnection.Command(SQL);
+
+            SQL = "DELETE FROM plugadresses " +
+                  "WHERE paddr_id = " + id;
+            
             DatabaseConnection.Command(SQL);
             DatabaseConnection.CloseConnection();
         }

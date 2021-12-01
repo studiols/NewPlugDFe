@@ -21,5 +21,11 @@ namespace PlugDFe.Forms.Services
             if (parseSuccess) { return true; }
             else { return false; }
         }
+
+        public static int SplitOption(string value)
+        {
+            int result = Convert.ToInt32(value.Split('-')[0]);
+            return result;
+        }
     }
 }

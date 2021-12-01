@@ -72,12 +72,12 @@ namespace PlugDFe.Forms
 
             if (dialog == DialogResult.Yes)
             {
-                Logs.Write(0, "0", "Aplicação finalizada pelo usuário", true);
+                Logs.Write(0, "Aplicação finalizada pelo usuário", true);
                 Environment.Exit(0);
             }
         }
 
-        private void btnStartApplication_Click(object sender, EventArgs e)
+        private void btnExecuteApplication_Click(object sender, EventArgs e)
         {
             ExecuteProcess();
         }
@@ -96,8 +96,7 @@ namespace PlugDFe.Forms
             GetConnectViewer getConnectViewer = new GetConnectViewer(databaseConnection);
             GetTransferredDocument getTransferredDocument = new GetTransferredDocument(databaseConnection);
             ManagePlugUserCrud managePlugUserCrud = new ManagePlugUserCrud(new PlugUserRepository(databaseConnection));
-            ICommunicationPlatform communicationPlatform = new CommunicationPlatformDFe();
-            ITransferredDocumentRepository transferredDocumentRepository = new TransferredDocumentRepository(databaseConnection);
+            ICommunicationPlatform communicationPlatform = new CommunicationPlatformDFe();           
             string token;
             List<PlugUser> plugUsers = getPlugUser.GetAll();
             List<PlugAddress> plugAdresses;
@@ -116,17 +115,23 @@ namespace PlugDFe.Forms
 
                 if (string.IsNullOrEmpty(token))
                 {
-                    PlatformLoginOutput output = logIn.Execute(plugUser.Email, PasswordEncryption.Decrypt(plugUser.Password), plugUser.IdCompany, plugUser.UnitCode);
+                    PlatformLoginOutput output = logIn.Execute(plugUser.Email, PasswordEncryption.Decrypt(plugUser.Password));
 
                     if (output.autorizado && output.status == "N")
                     {
+                        Logs.Write(plugUser.IdCompany, $"Login - Efetuado com sucesso! ({plugUser.Email})", false);
                         plugUser.SetToken(output.senha);
                         managePlugUserCrud.UpdateValidToken(plugUser.Id, output.senha);
                     }
-                    else                                            
+                    else
+                    {
+                        Logs.Write(plugUser.IdCompany, $"Login - {output.msg} ({plugUser.Email})", false);
                         continue;                    
-                }                
-
+                    }                                   
+                }
+                
+                Logs.Write(plugUser.IdCompany, $"Usuário logado! ({plugUser.Email})", true);
+                                    
                 #endregion
 
                 plugAdresses = getPlugAddress.GetAll(plugUser.Id);
@@ -142,7 +147,7 @@ namespace PlugDFe.Forms
                     foreach (PlugTask plugTask in plugTasks)
                     {
                         if (plugTask.IdConnectViewer != 0)
-                            connectViewer = getConnectViewer.GetById(plugAddress.Id);
+                            connectViewer = getConnectViewer.GetById(plugTask.IdConnectViewer);
 
                         HandlerAction.Handle(
                             plugUser,

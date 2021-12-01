@@ -6,9 +6,9 @@ namespace PlugDFe.Domain.Services
 {
     public static class Logs
     {
-        public static void Write(int idCompany, string unityCode, string msg, bool dashedLine = false)
+        public static void Write(int idCompany, string msg, bool dashedLine = false)
         {
-            string logName = Create(idCompany, unityCode);
+            string logName = Create(idCompany);
 
             TextWriter logFile = File.AppendText(logName);
 
@@ -19,7 +19,7 @@ namespace PlugDFe.Domain.Services
             logFile.Close();
         }
 
-        private static string Create(int idCompany, string unityCode)
+        private static string Create(int idCompany)
         {
             string today  = Convert.ToString(DateTime.Now).Split(' ')[0].Replace('/', '-');            
             string currentDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
@@ -31,7 +31,7 @@ namespace PlugDFe.Domain.Services
             }
 
             if (idCompany != 0)
-                logName = $"{Path.GetFullPath("Logs")}/log {today} - Empresa {idCompany} - Unidade {unityCode}.log";
+                logName = $"{Path.GetFullPath("Logs")}/log {today} - Empresa {idCompany}.log";
             else
                 logName = $"{Path.GetFullPath("Logs")}/log {today} - Geral.log";
 

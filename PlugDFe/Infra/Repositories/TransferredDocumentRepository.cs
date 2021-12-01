@@ -16,10 +16,13 @@ namespace PlugDFe.Infra.Repositories
         public void Delete(DateTime dateTime)
         {
             SQL = "DELETE from transferreddocuments " +
-                 "WHERE trdoc_issuedate < " + dateTime.AddDays(-4);
+                 "WHERE trdoc_issuedate < @ParamDate";
+
+            Dictionary<string, object> dBParameters = new Dictionary<string, object>();
+            dBParameters.Add("@ParamDate", FormatShortDate(dateTime));
 
             DatabaseConnection.OpenConnection();
-            DatabaseConnection.Command(SQL);
+            DatabaseConnection.CommandPar(SQL, dBParameters);
             DatabaseConnection.CloseConnection();
         }
 

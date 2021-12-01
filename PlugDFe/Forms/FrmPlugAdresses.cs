@@ -49,7 +49,7 @@ namespace PlugDFe.Forms
         private void btnDeletePlugAddress_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Deseja Excluir o Endereço Selecionado ?", "Excluir", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes) { ManagePlugAddressCrud.Delete(GetCurrentPlugAddressId()); ; }                        
+            if (dialogResult == DialogResult.Yes) { ManagePlugAddressCrud.Delete(GetCurrentPlugAddressId()); }                        
             FillGrdPlugAdresses();
         }
 

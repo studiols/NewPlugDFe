@@ -7,20 +7,23 @@ namespace PlugDFe.Domain.Entities
 {
     public class PlugTask : Notifiable<Notification>
     {
-        public PlugTask(int idPlugAddress, int action, int readMode, DateTime lastExecuteDate) : base()
+        public PlugTask(int idPlugAddress, int action, int readMode, DateTime lastExecuteDate, DateTime startDate) : base()
         {
             IdPlugAddress = idPlugAddress;                        
             Action = ConvertAction(action);
             ReadMode = ConvertReadMode(readMode);
             LastExecuteDate = lastExecuteDate;
+            StartDate = startDate;
         }
 
         public int Id { get; private set; }
         public int IdPlugAddress { get; private set; }
         public int IdConnectViewer { get; set; }        
         public EReadMode ReadMode { get; private set; }
-        public EAction Action { get; private set; }        
+        public EAction Action { get; private set; }
+        public string UnitCode { get; private set; }
         public DateTime LastExecuteDate { get; private set; }
+        public DateTime StartDate { get; private set; }
 
         public string GetAction()
         {
@@ -28,6 +31,7 @@ namespace PlugDFe.Domain.Entities
             else if (Action == EAction.EXCLUIR) { return "Excluir"; }
             else if (Action == EAction.ENVIAR_PERDIDOS_E_EXCLUIR) { return "Enviar Documentos Perdidos E Excluir"; }
             else if (Action == EAction.EXCLUIR_REGISTROS_VELHOS) { return "Excluir Registros Velhos"; }
+            else if (Action == EAction.ENVIAR_PERDIDOS_E_MANTER) { return "Enviar Documentos Perdidos E Manter"; }
             else { return "Inválido"; }
         }
 
@@ -45,6 +49,7 @@ namespace PlugDFe.Domain.Entities
             else if (action == 2) { return EAction.EXCLUIR; }
             else if (action == 3) { return EAction.ENVIAR_PERDIDOS_E_EXCLUIR; }
             else if (action == 4) { return EAction.EXCLUIR_REGISTROS_VELHOS; }
+            else if (action == 5) { return EAction.ENVIAR_PERDIDOS_E_MANTER; }
             else { return EAction.INVALIDO; }
         }
         
@@ -69,6 +74,11 @@ namespace PlugDFe.Domain.Entities
         public void SetLastExecuteDate(DateTime lastExecuteDate)
         {
             this.LastExecuteDate = lastExecuteDate;
+        }
+
+        public void SetUnitCode(string unitCode)
+        {
+            UnitCode = unitCode;
         }
     }
 }

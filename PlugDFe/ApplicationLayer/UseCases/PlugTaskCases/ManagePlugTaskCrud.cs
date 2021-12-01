@@ -13,18 +13,20 @@ namespace PlugDFe.ApplicationLayer.UseCases.PlugTaskCases
             PlugTaskRepository = plugTaskRepository;
         }
 
-        public void Create(int idPlugAddress, int idConnectViewer, int action, int readMode, DateTime lastExecuteDate)
+        public void Create(int idPlugAddress, int idConnectViewer, int action, int readMode, string unitCode, DateTime lastExecuteDate, DateTime startDate)
         {
-            PlugTask plugTask = new PlugTask(idPlugAddress, action, readMode, lastExecuteDate);
+            PlugTask plugTask = new PlugTask(idPlugAddress, action, readMode, lastExecuteDate, startDate);
             plugTask.SetIdConnectViewer(idConnectViewer);
+            plugTask.SetUnitCode(unitCode);
             PlugTaskRepository.Save(plugTask);            
         }
 
-        public void Update(int id, int idPlugAddress, int idConnectViewer, int action, int readMode, DateTime lastExecuteDate)
+        public void Update(int id, int idPlugAddress, int idConnectViewer, int action, int readMode, string unitCode, DateTime lastExecuteDate, DateTime startDate)
         {
-            PlugTask plugTask = new PlugTask(idPlugAddress, action, readMode, lastExecuteDate);
+            PlugTask plugTask = new PlugTask(idPlugAddress, action, readMode, lastExecuteDate, startDate);
             plugTask.SetId(id);
             plugTask.SetIdConnectViewer(idConnectViewer);
+            plugTask.SetUnitCode(unitCode);
             PlugTaskRepository.Update(plugTask);
         }
 

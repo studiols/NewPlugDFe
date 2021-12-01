@@ -69,8 +69,7 @@ namespace PlugDFe.Infra.Repositories.Create
 
             SQL = "CREATE TABLE IF NOT EXISTS plugusers (" +
                  "  puser_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                 "  puser_idcompany bigint DEFAULT NULL," +                 
-                 "  puser_unitcode varchar(25) DEFAULT NULL," +                 
+                 "  puser_idcompany bigint DEFAULT NULL," +                                             
                  "  puser_email varchar(80) DEFAULT NULL," +
                  "  puser_password varchar(25) DEFAULT NULL," +
                  "  puser_token varchar(255) DEFAULT NULL," +
@@ -101,8 +100,10 @@ namespace PlugDFe.Infra.Repositories.Create
                  "  ptask_paddr_id INTEGER DEFAULT NULL," +
                  "  ptask_connv_id INTEGER DEFAULT NULL," +
                  "  ptask_action INTEGER DEFAULT NULL," +
-                 "  ptask_readmode INTEGER DEFAULT NULL," +                 
-                 "  ptask_lastdateexecute datetime DEFAULT NULL" +
+                 "  ptask_readmode INTEGER DEFAULT NULL," +
+                 "  ptask_unitcode varchar(25) DEFAULT NULL," +
+                 "  ptask_lastdateexecute datetime DEFAULT NULL," +
+                 "  ptask_startdate datetime DEFAULT NULL" +
                  ")";
 
             DatabaseConnection.Command(SQL);

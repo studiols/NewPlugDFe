@@ -95,8 +95,8 @@
             // 
             this.btnDeletePlugTask.Location = new System.Drawing.Point(600, 58);
             this.btnDeletePlugTask.Name = "btnDeletePlugTask";
-            this.btnDeletePlugTask.Size = new System.Drawing.Size(64, 20);
-            this.btnDeletePlugTask.TabIndex = 8;
+            this.btnDeletePlugTask.Size = new System.Drawing.Size(73, 21);
+            this.btnDeletePlugTask.TabIndex = 3;
             this.btnDeletePlugTask.Text = "&Excluir";
             this.btnDeletePlugTask.UseVisualStyleBackColor = true;
             this.btnDeletePlugTask.Click += new System.EventHandler(this.btnDeletePlugTask_Click);
@@ -105,8 +105,8 @@
             // 
             this.btnUpdatePlugTask.Location = new System.Drawing.Point(600, 32);
             this.btnUpdatePlugTask.Name = "btnUpdatePlugTask";
-            this.btnUpdatePlugTask.Size = new System.Drawing.Size(64, 20);
-            this.btnUpdatePlugTask.TabIndex = 6;
+            this.btnUpdatePlugTask.Size = new System.Drawing.Size(73, 21);
+            this.btnUpdatePlugTask.TabIndex = 2;
             this.btnUpdatePlugTask.Text = "&Alterar";
             this.btnUpdatePlugTask.UseVisualStyleBackColor = true;
             this.btnUpdatePlugTask.Click += new System.EventHandler(this.btnUpdatePlugTask_Click);
@@ -115,8 +115,8 @@
             // 
             this.btnNewPlugTask.Location = new System.Drawing.Point(600, 6);
             this.btnNewPlugTask.Name = "btnNewPlugTask";
-            this.btnNewPlugTask.Size = new System.Drawing.Size(64, 20);
-            this.btnNewPlugTask.TabIndex = 5;
+            this.btnNewPlugTask.Size = new System.Drawing.Size(73, 21);
+            this.btnNewPlugTask.TabIndex = 1;
             this.btnNewPlugTask.Text = "&Novo";
             this.btnNewPlugTask.UseVisualStyleBackColor = true;
             this.btnNewPlugTask.Click += new System.EventHandler(this.btnNewPlugTask_Click);
@@ -125,11 +125,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(672, 337);
+            this.ClientSize = new System.Drawing.Size(678, 352);
             this.Controls.Add(this.btnDeletePlugTask);
             this.Controls.Add(this.btnUpdatePlugTask);
             this.Controls.Add(this.btnNewPlugTask);
             this.Controls.Add(this.grdPlugTasks);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmPlugTask";

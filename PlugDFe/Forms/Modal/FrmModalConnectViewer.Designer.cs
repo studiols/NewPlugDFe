@@ -67,7 +67,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(575, 39);
+            this.label1.Location = new System.Drawing.Point(9, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 13);
             this.label1.TabIndex = 4;
@@ -82,7 +82,7 @@
             "ORACLE",
             "SQLSERVER",
             "FIREBIRD"});
-            this.txtConnectViewerType.Location = new System.Drawing.Point(654, 31);
+            this.txtConnectViewerType.Location = new System.Drawing.Point(94, 33);
             this.txtConnectViewerType.Name = "txtConnectViewerType";
             this.txtConnectViewerType.Size = new System.Drawing.Size(237, 21);
             this.txtConnectViewerType.TabIndex = 5;
@@ -324,15 +324,15 @@
             // 
             // txtConnectViewerId
             // 
-            this.txtConnectViewerId.Location = new System.Drawing.Point(94, 6);
+            this.txtConnectViewerId.Location = new System.Drawing.Point(94, 5);
             this.txtConnectViewerId.Name = "txtConnectViewerId";
-            this.txtConnectViewerId.Size = new System.Drawing.Size(34, 20);
+            this.txtConnectViewerId.Size = new System.Drawing.Size(39, 20);
             this.txtConnectViewerId.TabIndex = 1;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 34);
+            this.label8.Location = new System.Drawing.Point(148, 9);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(35, 13);
             this.label8.TabIndex = 2;
@@ -340,16 +340,16 @@
             // 
             // txtConnectViewerStr
             // 
-            this.txtConnectViewerStr.Location = new System.Drawing.Point(94, 58);
+            this.txtConnectViewerStr.Location = new System.Drawing.Point(94, 61);
             this.txtConnectViewerStr.Name = "txtConnectViewerStr";
             this.txtConnectViewerStr.Size = new System.Drawing.Size(797, 20);
             this.txtConnectViewerStr.TabIndex = 7;
             // 
             // txtConnectViewerName
             // 
-            this.txtConnectViewerName.Location = new System.Drawing.Point(94, 32);
+            this.txtConnectViewerName.Location = new System.Drawing.Point(189, 5);
             this.txtConnectViewerName.Name = "txtConnectViewerName";
-            this.txtConnectViewerName.Size = new System.Drawing.Size(472, 20);
+            this.txtConnectViewerName.Size = new System.Drawing.Size(702, 20);
             this.txtConnectViewerName.TabIndex = 3;
             // 
             // FrmModalConnectViewer

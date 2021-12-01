@@ -27,8 +27,7 @@ namespace PlugDFe.Forms.Modal
                 if (plugUser != null) 
                 { 
                     txtIdPlugUser.Text = plugUser.Id.ToString();
-                    txtIdCompanyPlugUser.Text = plugUser.IdCompany.ToString();
-                    txtUnitCodePlugUser.Text = plugUser.UnitCode.ToString();
+                    txtIdCompanyPlugUser.Text = plugUser.IdCompany.ToString();                    
                     txtEmailPlugUser.Text = plugUser.Email.ToString();
                     txtPasswordPlugUser.Text = PasswordEncryption.Decrypt(plugUser.Password.ToString()); 
                 }
@@ -41,16 +40,14 @@ namespace PlugDFe.Forms.Modal
                         
             if (CommandAction == ECommandAction.INSERT)            
                 ManagePlugUserCrud.Create(
-                    Convert.ToInt32(txtIdCompanyPlugUser.Text),
-                    txtUnitCodePlugUser.Text,
+                    Convert.ToInt32(txtIdCompanyPlugUser.Text),                    
                     txtEmailPlugUser.Text,
                     PasswordEncryption.Encrypt(txtPasswordPlugUser.Text)
                 );            
             else            
                 ManagePlugUserCrud.Update(
                     Convert.ToInt32(txtIdPlugUser.Text),
-                    Convert.ToInt32(txtIdCompanyPlugUser.Text),
-                    txtUnitCodePlugUser.Text,
+                    Convert.ToInt32(txtIdCompanyPlugUser.Text),                    
                     txtEmailPlugUser.Text,
                     PasswordEncryption.Encrypt(txtPasswordPlugUser.Text)
                 );
@@ -67,8 +64,7 @@ namespace PlugDFe.Forms.Modal
         {
             List<string> errors = new List<string>();
             
-            if (InputValidator.IsNullOrEmpty(txtIdCompanyPlugUser.Text)) { errors.Add("O Id da Empresa deve ser preenchido corretamente!"); }
-            if (InputValidator.IsNullOrEmpty(txtUnitCodePlugUser.Text)) { errors.Add("O Código da Unidade deve ser preenchido corretamente!"); }
+            if (InputValidator.IsNullOrEmpty(txtIdCompanyPlugUser.Text)) { errors.Add("O Id da Empresa deve ser preenchido corretamente!"); }            
             if (InputValidator.IsNullOrEmpty(txtEmailPlugUser.Text)) { errors.Add("O Email deve ser preenchido corretamente!"); }
             if (InputValidator.IsNullOrEmpty(txtPasswordPlugUser.Text)) { errors.Add("A Senha deve ser preenchido corretamente!"); }
 

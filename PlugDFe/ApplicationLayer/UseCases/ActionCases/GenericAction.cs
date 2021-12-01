@@ -41,30 +41,116 @@ namespace PlugDFe.ApplicationLayer.UseCases.ActionCases
 
             if (ConnectViewer != null)
             {
-                Logs.Write(PlugUser.IdCompany, PlugUser.UnitCode, $"Executando consulta ao banco de dados ({ConnectViewer.Type})...");
-                ExecuteQueryOutput executeQueryOutput = executeQuery.Execute(new ExecuteQueryInput(ConnectViewer.Type, ConnectViewer.Str, ConnectViewer.Command, PlugUser.UnitCode));
+                Logs.Write(PlugUser.IdCompany, $"Executando consulta ao banco de dados ({ConnectViewer.Type})...");
+                ExecuteQueryOutput executeQueryOutput = executeQuery.Execute(new ExecuteQueryInput(ConnectViewer.Type, ConnectViewer.Str, ConnectViewer.Command, PlugTask.UnitCode));
 
                 if (executeQueryOutput.Success)
                 {
-                    Logs.Write(PlugUser.IdCompany, PlugUser.UnitCode, "Consulta executada com sucesso!");
+                    Logs.Write(PlugUser.IdCompany, $"Consulta executada com sucesso! Arquivos Encontrados:{executeQueryOutput.Dt.Rows.Count}");
                     HandlerFiles.CreateFiles(PlugAddress.Path, executeQueryOutput.Dt, ConnectViewer.BlobToBase64, ConnectViewer.Base64ToString, ConnectViewer.CompressedBase64ToString);
                 }
                 else
                 {
-                    Logs.Write(PlugUser.IdCompany, PlugUser.UnitCode, $"Erro ao executar consulta");
+                    Logs.Write(PlugUser.IdCompany, $"Erro ao executar consulta");
                 }
             }            
         }
-        public List<FileInfo> SendFiles()
-        {            
-            ZipFilesOutput zipFilesOutput = HandlerFiles.CreateTemporaryZipFiles(PlugAddress.Path, PlugTask.ReadMode, Convert.ToDateTime(PlugTask.LastExecuteDate));
-            Logs.Write(PlugUser.IdCompany, PlugUser.UnitCode, "Criando Arquivos Zip Temporários...");
+        public void RedundancyQueryToFiles()
+        {
+            #region Consultando Documentos que não foram enviados
 
+            ExecuteQuery executeQuery = new ExecuteQuery();
+            ExecuteQueryInput executeQueryInput;
+            DateTime finalDate = DateTime.Now;
+
+            if (TransferredDocuments == null) 
+            {
+                Logs.Write(PlugUser.IdCompany, $"Não existem chaves gravadas para executar a consulta de redundância!");
+                return;
+            } 
+            else if (ConnectViewer == null)
+            {
+                Logs.Write(PlugUser.IdCompany, $"O modo de redundância não é feito para se utilizar com pastas, por favor troque a ação executada imediatamente!");
+                return;
+            }
+            else if (finalDate.AddDays(1).Day > 4)
+            {
+                Logs.Write(PlugUser.IdCompany, $"Redundância não executada, pois só pode ser executada do dia 30 ao dia 3");
+                return;
+            }
+            else if (finalDate.AddDays(1).AddMonths(-1).Month < PlugTask.StartDate.Month)
+            {
+                Logs.Write(PlugUser.IdCompany, $"Redundância não executada, pois só pode ser executada quando a data for superior ao mês de início, salvo o último dia do Mês");
+                return;
+            }
+
+           
+            List<string> listOfTransferredKeys = new List<string>();
+
+            foreach (TransferredDocument document in TransferredDocuments)
+            {
+                listOfTransferredKeys.Add("'" + document.Key + "'");
+            }
+
+            string stringListOfTransferredKeys = string.Join(",", listOfTransferredKeys);
+
+            executeQueryInput = new ExecuteQueryInput(
+                ConnectViewer.Type,
+                ConnectViewer.Str,
+                ConnectViewer.Command,
+                PlugTask.UnitCode
+            );
+ 
+            DateTime initialDate = new DateTime(finalDate.Year, finalDate.Month, 1);            
+
+            if (finalDate.Day >= 1 && finalDate.Day <= 3)
+            {
+                int year = finalDate.AddMonths(-1).Year;
+                int month = finalDate.AddMonths(-1).Month;
+
+                initialDate = new DateTime(year, month, 1);
+            }
+                                                        
+            executeQueryInput.AddInitialDate("'" + initialDate.ToString("yyyy-MM-dd") + "'");
+            executeQueryInput.AddFinalDate("'" + finalDate.ToString("yyyy-MM-dd") + "'");
+            executeQueryInput.AddTransferredKeys(stringListOfTransferredKeys);
+
+            Logs.Write(PlugUser.IdCompany, $"Executando consulta ao banco de dados ({ConnectViewer.Type})...");
+
+            ExecuteQueryOutput executeQueryOutput = executeQuery.Execute(executeQueryInput);
+
+            if (executeQueryOutput.Success)
+            {
+                Logs.Write(PlugUser.IdCompany, $"Consulta (Redundância) executada com sucesso! Arquivos Encontrados:{executeQueryOutput.Dt.Rows.Count}");
+                HandlerFiles.CreateFiles(
+                    PlugAddress.Path,
+                    executeQueryOutput.Dt,
+                    ConnectViewer.BlobToBase64,
+                    ConnectViewer.Base64ToString,
+                    ConnectViewer.CompressedBase64ToString
+                );
+            }
+            else
+            {
+                Logs.Write(PlugUser.IdCompany, "Erro Ao realizar consulta");
+                return;
+            }
+            
+            #endregion
+        }
+        public List<FileInfo> SendFiles(bool redundancy = false)
+        {            
+            ZipFilesOutput zipFilesOutput = HandlerFiles.CreateTemporaryZipFiles(PlugAddress.Path, PlugTask.ReadMode, Convert.ToDateTime(PlugTask.LastExecuteDate), PlugTask.StartDate, redundancy);
+            
             if (!zipFilesOutput.Success) 
             {
-                Logs.Write(PlugUser.IdCompany, PlugUser.UnitCode, zipFilesOutput.Msg);
+                Logs.Write(PlugUser.IdCompany, zipFilesOutput.Msg);
                 return new List<FileInfo>();
-            }           
+            }
+
+            string msgRedundancy = redundancy ? "(Redundância)" : "";
+
+            Logs.Write(PlugUser.IdCompany, $"Criando Arquivos Zip Temporários... {msgRedundancy}");
 
             Upload upload = new Upload(CommunicationPlatform);
             PlatformUploadOutput uploadOutput;
@@ -74,21 +160,24 @@ namespace PlugDFe.ApplicationLayer.UseCases.ActionCases
                 uploadOutput = upload.Execute(PlugUser.IdCompany.ToString(), PlugUser.Email, PlugUser.Token, zipFilesOutput.ZipPaths[i]);
 
                 if (uploadOutput.Sucesso)
-                    Logs.Write(PlugUser.IdCompany, PlugUser.UnitCode, $"Arquivo {(i + 1)}/{zipFilesOutput.ZipPaths.Count} - {uploadOutput.Msg}");
+                {
+                    Logs.Write(PlugUser.IdCompany, $"Arquivo {(i + 1)}/{zipFilesOutput.ZipPaths.Count} - {uploadOutput.Msg}");
+                }
                 else
-                    Logs.Write(PlugUser.IdCompany, PlugUser.UnitCode, $"Erro Arquivo {(i + 1)}/{zipFilesOutput.ZipPaths.Count} - {uploadOutput.Msg}");
+                {
+                    Logs.Write(PlugUser.IdCompany, $"Erro Arquivo {(i + 1)}/{zipFilesOutput.ZipPaths.Count} - {uploadOutput.Msg}");
+                }
             }
 
             for (int i = 0; i < zipFilesOutput.ValidFilesAfterFilter.Count; i++)
             {
-                TransferredDocumentRepository.SaveIfNotExists(new TransferredDocument(zipFilesOutput.ValidFilesAfterFilter[i].Name, DateTime.Now));
-            }
-
-            Logs.Write(PlugUser.IdCompany, PlugUser.UnitCode, $"{zipFilesOutput.ValidFilesAfterFilter.Count} Registros Gravados!");
+                // Salvo tudo, pois não sei quais foram rejeitados
+                TransferredDocumentRepository.SaveIfNotExists(new TransferredDocument(zipFilesOutput.ValidFilesAfterFilter[i].Name.Replace(".XML", ""), DateTime.Now));
+            }            
 
             HandlerFiles.DeleteRemainingTemporaryZipFiles(zipFilesOutput.ZipPaths);            
 
             return zipFilesOutput.ValidFilesAfterFilter;
-        }
+        }        
     }
 }

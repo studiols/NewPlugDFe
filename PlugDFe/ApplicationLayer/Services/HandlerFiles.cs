@@ -42,19 +42,26 @@ namespace PlugDFe.ApplicationLayer.Services
             }
         }
 
-        public static ZipFilesOutput CreateTemporaryZipFiles(string address, EReadMode readAction, DateTime lastDateExecute)
+        public static ZipFilesOutput CreateTemporaryZipFiles(string address, EReadMode readAction, DateTime lastDateExecute, DateTime startDate, bool redundancy = false)
         {
             try
             {
                 //Gravar Log (Coleta iniciada)
                 long maxBytesOnZip = 10276045;
+                List<FileInfo> validFilesAfterFilter = new List<FileInfo>();
                 List<string> zipsToUploadPaths = new List<string>();
 
                 FileInfo[] files = GetFiles(address);
-                IEnumerable<FileInfo> filteredFiles = FilterFiles(readAction, files, lastDateExecute);
+                IEnumerable<FileInfo> filteredFiles = FilterFiles(readAction, files, lastDateExecute, startDate, redundancy);
+
+                if (filteredFiles == null)
+                {
+                    return new ZipFilesOutput(false, "Nenhum arquivo válido encontrado!", zipsToUploadPaths, validFilesAfterFilter);
+                }
+
                 string nameArqTemp = Path.GetTempPath() + "ArqDFe" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".zip";
+
                 ZipArchive zip = CreateZip(nameArqTemp);
-                List<FileInfo> validFilesAfterFilter = new List<FileInfo>();
 
                 zipsToUploadPaths.Add(nameArqTemp); //Criando nome do primeiro arquivo temporário ZIP
 
@@ -107,7 +114,7 @@ namespace PlugDFe.ApplicationLayer.Services
                 return new ZipFilesOutput(false, ex.Message, null, null);
             }
 
-        }
+        }        
         
         public static void DeleteRemainingTemporaryZipFiles(List<string> zipPaths)
         {
@@ -136,11 +143,31 @@ namespace PlugDFe.ApplicationLayer.Services
             return files;
         }
 
-        private static IEnumerable<FileInfo> FilterFiles(EReadMode readAction, FileInfo[] files, DateTime lastDateExecute)
+        private static IEnumerable<FileInfo> FilterFiles(EReadMode readAction, FileInfo[] files, DateTime lastDateExecute, DateTime startDate,  bool redundancy = false)
         {
             IEnumerable<FileInfo> filteredFiles;
 
-            if (readAction == EReadMode.DOCUMENTOS_CRIADOS_APOS_ULTIMA_EXECUCAO)
+            if (redundancy)
+            {
+                DateTime finalDate = DateTime.Now;
+                DateTime initialDate = new DateTime(finalDate.Year, finalDate.Month, 1);
+
+                if (finalDate.AddDays(1).Day > 4) { return null; }
+                if (finalDate.AddDays(1).AddMonths(-1).Month < startDate.Month) { return null; }
+
+                if (finalDate.Day >= 1 && finalDate.Day <= 3)
+                {
+                    int year = finalDate.AddMonths(-1).Year;
+                    int month = finalDate.AddMonths(-1).Month;
+
+                    initialDate = new DateTime(year, month, 1);
+                }
+
+                filteredFiles = from a in files
+                where a.CreationTime >= initialDate
+                select a;
+            }         
+            else if (readAction == EReadMode.DOCUMENTOS_CRIADOS_APOS_ULTIMA_EXECUCAO)
             {
                 filteredFiles = from a in files
                                 where a.CreationTime > lastDateExecute

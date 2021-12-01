@@ -13,13 +13,15 @@ namespace PlugDFe.Infra.Repositories
        
         public void Save(PlugTask plugTask)
         {            
-            SQL = "INSERT INTO plugtasks (ptask_paddr_id, ptask_connv_id, ptask_action, ptask_readmode, ptask_lastdateexecute) " +
+            SQL = "INSERT INTO plugtasks (ptask_paddr_id, ptask_connv_id, ptask_action, ptask_readmode, ptask_unitcode, ptask_lastdateexecute, ptask_startdate) " +
                   "VALUES(" +                  
                     "@Address, " +
                     "@IdConnectViewer, " +
                     "@Action, " +
                     "@ReadMode, " +
-                    "@LastExecuteDate" +
+                    "@UnitCode, " +
+                    "@LastExecuteDate, " +
+                    "@StartDate" +
                   ")";
 
             Dictionary<string, object> dBParameters = new Dictionary<string, object>
@@ -28,7 +30,9 @@ namespace PlugDFe.Infra.Repositories
                 { "@IdConnectViewer", plugTask.IdConnectViewer },
                 { "@Action", (int)plugTask.Action },
                 { "@ReadMode", (int)plugTask.ReadMode },
-                { "@LastExecuteDate", FormatFullDate(plugTask.LastExecuteDate) }
+                { "@UnitCode", plugTask.UnitCode },
+                { "@LastExecuteDate", FormatFullDate(plugTask.LastExecuteDate) },
+                { "@StartDate", FormatFullDate(plugTask.StartDate) }
             };
 
             DatabaseConnection.OpenConnection();
@@ -44,7 +48,9 @@ namespace PlugDFe.Infra.Repositories
                     "ptask_connv_id = @IdConnectViewer, " +                                        
                     "ptask_action = @Action, " +
                     "ptask_readmode = @ReadMode, " +
-                    "ptask_lastdateexecute = @LastExecuteDate " +
+                    "ptask_unitcode = @UnitCode, " +
+                    "ptask_lastdateexecute = @LastExecuteDate, " +
+                    "ptask_startdate = @StartDate " +
                   "WHERE ptask_id = @Id";
 
             Dictionary<string, object> dBParameters = new Dictionary<string, object>();
@@ -53,7 +59,9 @@ namespace PlugDFe.Infra.Repositories
             dBParameters.Add("@IdConnectViewer", plugTask.IdConnectViewer);            
             dBParameters.Add("@Action", (int)plugTask.Action);
             dBParameters.Add("@ReadMode", (int)plugTask.ReadMode);
+            dBParameters.Add("@UnitCode", plugTask.UnitCode);
             dBParameters.Add("@LastExecuteDate", FormatFullDate(plugTask.LastExecuteDate));
+            dBParameters.Add("@StartDate", FormatFullDate(plugTask.StartDate));
 
             DatabaseConnection.OpenConnection();
             DatabaseConnection.CommandPar(SQL, dBParameters);

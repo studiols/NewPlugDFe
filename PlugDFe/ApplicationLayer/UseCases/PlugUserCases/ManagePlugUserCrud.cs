@@ -12,25 +12,23 @@ namespace PlugDFe.ApplicationLayer.UseCases.PlugUserCases
             PlugUserRepository = plugUserRepository;
         }
 
-        public void Create(int idCompany, string unitCode, string email, string password)
+        public void Create(int idCompany, string email, string password)
         {
             PlugUserRepository.Save(
                 new PlugUser(
                     email,
                     password,
-                    idCompany,
-                    unitCode
+                    idCompany                
                 )
             );
         }
 
-        public void Update(int id, int idCompany, string unitCode, string email, string password)
+        public void Update(int id, int idCompany, string email, string password)
         {
             PlugUser plugUser = new PlugUser(
                 email,
                 password,
-                idCompany,
-                unitCode
+                idCompany                
             );
             plugUser.SetId(id);
             PlugUserRepository.Update(plugUser);

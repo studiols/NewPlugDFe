@@ -42,7 +42,6 @@ namespace PlugDFe.Forms
             this.grdPlugUsers = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnitCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnNewPlugUser = new System.Windows.Forms.Button();
             this.tabConnections = new System.Windows.Forms.TabPage();
@@ -73,7 +72,7 @@ namespace PlugDFe.Forms
             this.tabControlParameters.Location = new System.Drawing.Point(0, 1);
             this.tabControlParameters.Name = "tabControlParameters";
             this.tabControlParameters.SelectedIndex = 0;
-            this.tabControlParameters.Size = new System.Drawing.Size(671, 351);
+            this.tabControlParameters.Size = new System.Drawing.Size(680, 351);
             this.tabControlParameters.TabIndex = 0;
             // 
             // tabConfigs
@@ -84,18 +83,18 @@ namespace PlugDFe.Forms
             this.tabConfigs.Location = new System.Drawing.Point(4, 22);
             this.tabConfigs.Name = "tabConfigs";
             this.tabConfigs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConfigs.Size = new System.Drawing.Size(663, 325);
+            this.tabConfigs.Size = new System.Drawing.Size(672, 325);
             this.tabConfigs.TabIndex = 0;
             this.tabConfigs.Text = "Configurações";
             this.tabConfigs.UseVisualStyleBackColor = true;
             // 
             // btnRecordConfigs
             // 
-            this.btnRecordConfigs.Location = new System.Drawing.Point(596, 6);
+            this.btnRecordConfigs.Location = new System.Drawing.Point(592, 6);
             this.btnRecordConfigs.Name = "btnRecordConfigs";
-            this.btnRecordConfigs.Size = new System.Drawing.Size(64, 20);
+            this.btnRecordConfigs.Size = new System.Drawing.Size(73, 21);
             this.btnRecordConfigs.TabIndex = 2;
-            this.btnRecordConfigs.Text = "Gravar";
+            this.btnRecordConfigs.Text = "&Gravar";
             this.btnRecordConfigs.UseVisualStyleBackColor = true;
             this.btnRecordConfigs.Click += new System.EventHandler(this.btnRecordConfigs_Click);
             // 
@@ -140,7 +139,7 @@ namespace PlugDFe.Forms
             this.tabUsers.Location = new System.Drawing.Point(4, 22);
             this.tabUsers.Name = "tabUsers";
             this.tabUsers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUsers.Size = new System.Drawing.Size(663, 325);
+            this.tabUsers.Size = new System.Drawing.Size(672, 325);
             this.tabUsers.TabIndex = 1;
             this.tabUsers.Text = "Usuários";
             this.tabUsers.UseVisualStyleBackColor = true;
@@ -149,7 +148,7 @@ namespace PlugDFe.Forms
             // 
             this.btnDeletePlugUser.Location = new System.Drawing.Point(592, 84);
             this.btnDeletePlugUser.Name = "btnDeletePlugUser";
-            this.btnDeletePlugUser.Size = new System.Drawing.Size(64, 20);
+            this.btnDeletePlugUser.Size = new System.Drawing.Size(73, 21);
             this.btnDeletePlugUser.TabIndex = 4;
             this.btnDeletePlugUser.Text = "&Excluir";
             this.btnDeletePlugUser.UseVisualStyleBackColor = true;
@@ -159,7 +158,7 @@ namespace PlugDFe.Forms
             // 
             this.btnGetPlugAdresses.Location = new System.Drawing.Point(592, 58);
             this.btnGetPlugAdresses.Name = "btnGetPlugAdresses";
-            this.btnGetPlugAdresses.Size = new System.Drawing.Size(64, 20);
+            this.btnGetPlugAdresses.Size = new System.Drawing.Size(73, 21);
             this.btnGetPlugAdresses.TabIndex = 3;
             this.btnGetPlugAdresses.Text = "&Configurar";
             this.btnGetPlugAdresses.UseVisualStyleBackColor = true;
@@ -169,7 +168,7 @@ namespace PlugDFe.Forms
             // 
             this.btnUpdatePlugUser.Location = new System.Drawing.Point(592, 32);
             this.btnUpdatePlugUser.Name = "btnUpdatePlugUser";
-            this.btnUpdatePlugUser.Size = new System.Drawing.Size(64, 20);
+            this.btnUpdatePlugUser.Size = new System.Drawing.Size(73, 21);
             this.btnUpdatePlugUser.TabIndex = 2;
             this.btnUpdatePlugUser.Text = "&Alterar";
             this.btnUpdatePlugUser.UseVisualStyleBackColor = true;
@@ -183,7 +182,6 @@ namespace PlugDFe.Forms
             this.grdPlugUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.IdCompany,
-            this.UnitCode,
             this.Email});
             this.grdPlugUsers.Location = new System.Drawing.Point(8, 6);
             this.grdPlugUsers.MultiSelect = false;
@@ -209,14 +207,6 @@ namespace PlugDFe.Forms
             this.IdCompany.ReadOnly = true;
             this.IdCompany.Width = 135;
             // 
-            // UnitCode
-            // 
-            this.UnitCode.DataPropertyName = "UnitCode";
-            this.UnitCode.HeaderText = "Código da Unidade";
-            this.UnitCode.Name = "UnitCode";
-            this.UnitCode.ReadOnly = true;
-            this.UnitCode.Width = 135;
-            // 
             // Email
             // 
             this.Email.DataPropertyName = "Email";
@@ -229,7 +219,7 @@ namespace PlugDFe.Forms
             // 
             this.btnNewPlugUser.Location = new System.Drawing.Point(592, 6);
             this.btnNewPlugUser.Name = "btnNewPlugUser";
-            this.btnNewPlugUser.Size = new System.Drawing.Size(64, 20);
+            this.btnNewPlugUser.Size = new System.Drawing.Size(73, 21);
             this.btnNewPlugUser.TabIndex = 1;
             this.btnNewPlugUser.Text = "&Novo";
             this.btnNewPlugUser.UseVisualStyleBackColor = true;
@@ -244,7 +234,7 @@ namespace PlugDFe.Forms
             this.tabConnections.Location = new System.Drawing.Point(4, 22);
             this.tabConnections.Name = "tabConnections";
             this.tabConnections.Padding = new System.Windows.Forms.Padding(3);
-            this.tabConnections.Size = new System.Drawing.Size(663, 325);
+            this.tabConnections.Size = new System.Drawing.Size(672, 325);
             this.tabConnections.TabIndex = 2;
             this.tabConnections.Text = "Conexões";
             this.tabConnections.UseVisualStyleBackColor = true;
@@ -253,9 +243,9 @@ namespace PlugDFe.Forms
             // 
             this.btnDeleteConnection.Location = new System.Drawing.Point(592, 58);
             this.btnDeleteConnection.Name = "btnDeleteConnection";
-            this.btnDeleteConnection.Size = new System.Drawing.Size(64, 20);
-            this.btnDeleteConnection.TabIndex = 4;
-            this.btnDeleteConnection.Text = "Excluir";
+            this.btnDeleteConnection.Size = new System.Drawing.Size(73, 21);
+            this.btnDeleteConnection.TabIndex = 3;
+            this.btnDeleteConnection.Text = "&Excluir";
             this.btnDeleteConnection.UseVisualStyleBackColor = true;
             this.btnDeleteConnection.Click += new System.EventHandler(this.btnDeleteConnection_Click);
             // 
@@ -263,9 +253,9 @@ namespace PlugDFe.Forms
             // 
             this.btnUpdateConnection.Location = new System.Drawing.Point(592, 32);
             this.btnUpdateConnection.Name = "btnUpdateConnection";
-            this.btnUpdateConnection.Size = new System.Drawing.Size(64, 20);
+            this.btnUpdateConnection.Size = new System.Drawing.Size(73, 21);
             this.btnUpdateConnection.TabIndex = 2;
-            this.btnUpdateConnection.Text = "Alterar";
+            this.btnUpdateConnection.Text = "&Alterar";
             this.btnUpdateConnection.UseVisualStyleBackColor = true;
             this.btnUpdateConnection.Click += new System.EventHandler(this.btnUpdateConnection_Click);
             // 
@@ -273,9 +263,9 @@ namespace PlugDFe.Forms
             // 
             this.btnNewConnection.Location = new System.Drawing.Point(592, 6);
             this.btnNewConnection.Name = "btnNewConnection";
-            this.btnNewConnection.Size = new System.Drawing.Size(64, 20);
+            this.btnNewConnection.Size = new System.Drawing.Size(73, 21);
             this.btnNewConnection.TabIndex = 1;
-            this.btnNewConnection.Text = "Novo";
+            this.btnNewConnection.Text = "&Novo";
             this.btnNewConnection.UseVisualStyleBackColor = true;
             this.btnNewConnection.Click += new System.EventHandler(this.btnNewConnection_Click);
             // 
@@ -347,8 +337,9 @@ namespace PlugDFe.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(672, 352);
+            this.ClientSize = new System.Drawing.Size(678, 352);
             this.Controls.Add(this.tabControlParameters);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmParameters";
@@ -393,7 +384,6 @@ namespace PlugDFe.Forms
         private DataGridViewTextBoxColumn ConnectViewerCompressedBase64ToString;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn IdCompany;
-        private DataGridViewTextBoxColumn UnitCode;
         private DataGridViewTextBoxColumn Email;
     }
 }

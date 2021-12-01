@@ -148,7 +148,9 @@ namespace PlugDFe.Forms.Modal
             {
                 string msg = "[CURRENT_DATE]\t\t Data Corrente (Formato 2021-01-01)\n" +
                              "[CURRENT_DATE_STRING]\t Data Corrente (Formato 20210101)\n" +
-                             "[UNIDADE]\t\t Unidade passada no argumento\n";
+                             "[UNIDADE]\t\t Unidade passada no argumento\n" +
+                             "[KEYS]\t\t Chaves transmitidas\n" +
+                             "[INITIAL_DATE]\t\t Data Inicial\n";
 
                 MessageBox.Show(msg, "Variáveis disponíveis");
             }
