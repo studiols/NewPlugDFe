@@ -17,7 +17,7 @@ namespace PlugDFe.ApplicationLayer.UseCases.ActionCases
 
         public void Execute()
         {
-            RedundancyQueryToFiles();
+            RedundancyHandleLostDocuments();
             List<FileInfo> validFilesAfterFilter = SendFiles();            
             HandlerFiles.DeleteFiles(validFilesAfterFilter);
         }

@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using Npgsql;
 using Oracle.ManagedDataAccess.Client;
 using PlugDFe.ApplicationLayer.DTO.ConnectViewerIO;
+using PlugDFe.Domain.Services;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -19,6 +20,9 @@ namespace PlugDFe.ApplicationLayer.UseCases.ConnectViewerCases
                 return new ExecuteQueryOutput(null, false);
             }
 
+            if (input.Command.IndexOf("[DIVISION]") >= 0)
+                input.Command = input.Command.Split(new[] { "[DIVISION]" }, StringSplitOptions.None)[input.CommandSequence];
+         
             if (input.Command.IndexOf("[CURRENT_DATE]") >= 0)
                 input.Command = input.Command.Replace("[CURRENT_DATE]", "CURRENT_DATE");
 
@@ -27,9 +31,9 @@ namespace PlugDFe.ApplicationLayer.UseCases.ConnectViewerCases
 
             if (input.Command.IndexOf("[UNIDADE]") >= 0)
             {
-                if (input.ArgUnit == "") { input.ArgUnit = "1"; }
+                if (input.ArgUnit == "") { input.ArgUnit = "'1'"; }
 
-                input.Command = input.Command.Replace("[UNIDADE]", input.ArgUnit);
+                input.Command = input.Command.Replace("[UNIDADE]", $"'{input.ArgUnit}'");
             }
 
             if (input.Command.IndexOf("[INITIAL_DATE]") >= 0)            
@@ -39,11 +43,13 @@ namespace PlugDFe.ApplicationLayer.UseCases.ConnectViewerCases
                 input.Command = input.Command.Replace("[FINAL_DATE]", input.InitialDate);
 
             if (input.Command.IndexOf("[KEYS]") >= 0)
-                input.Command = input.Command.Replace("[KEYS]", input.TransferredKeys);
+                input.Command = input.Command.Replace("[KEYS]", input.KeysToSend);
 
             System.Windows.Forms.Clipboard.SetText(input.Command); //CTRL+C
 
             DataTable dt = new DataTable();
+
+            Logs.Write(0, $"Query Executada: {input.Command}");
 
             if (input.Type == "MYSQL")
             {

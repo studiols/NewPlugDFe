@@ -66,9 +66,7 @@ namespace PlugDFe.Forms.Modal
                    chkConnectViewerBase64ToString.Checked ? "S" : "N",
                    chkConnectViewerCompressedBase64ToString.Checked ? "S" : "N"
                );
-            }
-
-            this.Close();
+            }            
         }
 
         private List<string> ValidateAllInputs()
@@ -149,8 +147,10 @@ namespace PlugDFe.Forms.Modal
                 string msg = "[CURRENT_DATE]\t\t Data Corrente (Formato 2021-01-01)\n" +
                              "[CURRENT_DATE_STRING]\t Data Corrente (Formato 20210101)\n" +
                              "[UNIDADE]\t\t Unidade passada no argumento\n" +
-                             "[KEYS]\t\t Chaves transmitidas\n" +
-                             "[INITIAL_DATE]\t\t Data Inicial\n";
+                             "[KEYS]\t\t\t Chaves encontradas\n" +
+                             "[INITIAL_DATE]\t\t Data Inicial\n" +
+                             "[FINAL_DATE]\t\t Data Final\n" +
+                             "[DIVISION]\t\t Separador de Query/Command\n";
 
                 MessageBox.Show(msg, "Variáveis disponíveis");
             }

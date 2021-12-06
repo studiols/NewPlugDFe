@@ -16,18 +16,19 @@ namespace PlugDFe.ApplicationLayer.Query
             DatabaseConnection = databaseConnection;
         }
 
-        public List<TransferredDocument> GetLastDays(DateTime initialDate, DateTime finalDate)
+        public List<TransferredDocument> GetLastDays(DateTime initialDate, DateTime finalDate, int idPlugTask)
         {
             TransferredDocument transferredDocument;
             List<TransferredDocument> transferredDocuments = new List<TransferredDocument>();
             DataTable dt;
 
             SQL = "SELECT * FROM transferreddocuments " +
-                 "WHERE trdoc_issuedate between @InitialDate AND @FinalDate";            
+                 "WHERE trdoc_issuedate between @InitialDate AND @FinalDate AND trdoc_ptask_id = @IdPlugTask";            
 
             Dictionary<string, object> dBParameters = new Dictionary<string, object>();
             dBParameters.Add("@InitialDate", initialDate);
             dBParameters.Add("@FinalDate", finalDate);
+            dBParameters.Add("@IdPlugTask", idPlugTask);
 
             DatabaseConnection.OpenConnection();
             dt = DatabaseConnection.QueryPar(SQL, dBParameters);
@@ -39,11 +40,11 @@ namespace PlugDFe.ApplicationLayer.Query
             {
                 transferredDocument = new TransferredDocument(
                     dr["trdoc_key"].ToString(),
+                    Convert.ToInt32(dr["trdoc_ptask_id"]),
                     Convert.ToDateTime(dr["trdoc_issuedate"])
                 );
 
                 transferredDocument.SetId(Convert.ToInt32(dr["trdoc_id"]));
-
 
                 transferredDocuments.Add(transferredDocument);
             }
@@ -72,6 +73,7 @@ namespace PlugDFe.ApplicationLayer.Query
             {
                 transferredDocument = new TransferredDocument(
                     dr["trdoc_key"].ToString(),
+                    Convert.ToInt32(dr["trdoc_ptask_id"]),
                     Convert.ToDateTime(dr["trdoc_issuedate"])
                 );
 

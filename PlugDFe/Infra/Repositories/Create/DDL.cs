@@ -115,6 +115,7 @@ namespace PlugDFe.Infra.Repositories.Create
             SQL = "CREATE TABLE IF NOT EXISTS transferreddocuments (" +
                   " trdoc_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                   " trdoc_key varchar(50) NOT NULL," +
+                  " trdoc_ptask_id INTEGER NOT NULL," +
                   " trdoc_issuedate date DEFAULT NULL" +
                   ")";
 
