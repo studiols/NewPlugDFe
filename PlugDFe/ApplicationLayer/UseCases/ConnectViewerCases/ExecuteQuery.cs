@@ -29,6 +29,12 @@ namespace PlugDFe.ApplicationLayer.UseCases.ConnectViewerCases
             if (input.Command.IndexOf("[CURRENT_DATE_STRING]") >= 0)
                 input.Command = input.Command.Replace("[CURRENT_DATE_STRING]", DateTime.Now.ToString("yyyyMMdd"));
 
+            if (input.Command.IndexOf("[DATA_ATUAL]") >= 0)
+                input.Command = input.Command.Replace("[DATA_ATUAL]", DateTime.Now.ToString("dd/MM/yyyy"));
+
+            if (input.Command.IndexOf("[DATA_ANTERIOR]") >= 0)
+                input.Command = input.Command.Replace("[DATA_ANTERIOR]", DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy"));
+
             if (input.Command.IndexOf("[UNIDADE]") >= 0)
             {
                 if (input.ArgUnit == "") { input.ArgUnit = "'1'"; }
