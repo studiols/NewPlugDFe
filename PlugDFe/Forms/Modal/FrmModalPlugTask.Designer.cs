@@ -45,13 +45,15 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtStartDatePlugTask = new System.Windows.Forms.MaskedTextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtGroupCodePlugTask = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 57);
+            this.label6.Location = new System.Drawing.Point(20, 56);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(49, 13);
             this.label6.TabIndex = 2;
@@ -60,7 +62,7 @@
             // cbbIdConnectViewerPlugTask
             // 
             this.cbbIdConnectViewerPlugTask.FormattingEnabled = true;
-            this.cbbIdConnectViewerPlugTask.Location = new System.Drawing.Point(154, 53);
+            this.cbbIdConnectViewerPlugTask.Location = new System.Drawing.Point(154, 52);
             this.cbbIdConnectViewerPlugTask.Name = "cbbIdConnectViewerPlugTask";
             this.cbbIdConnectViewerPlugTask.Size = new System.Drawing.Size(291, 21);
             this.cbbIdConnectViewerPlugTask.TabIndex = 3;
@@ -104,16 +106,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 185);
+            this.label1.Location = new System.Drawing.Point(20, 211);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 13);
-            this.label1.TabIndex = 10;
+            this.label1.TabIndex = 12;
             this.label1.Text = "Ultima Data de Execução";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 121);
+            this.label4.Location = new System.Drawing.Point(20, 118);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(127, 13);
             this.label4.TabIndex = 6;
@@ -122,7 +124,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 89);
+            this.label3.Location = new System.Drawing.Point(20, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(115, 13);
             this.label3.TabIndex = 4;
@@ -135,7 +137,7 @@
             "1-Documentos Atuais",
             "2-Documentos Do Dia Anterior",
             "3-Documentos Criados Após Ultima Data De Execução"});
-            this.cbbReadModePlugTask.Location = new System.Drawing.Point(154, 117);
+            this.cbbReadModePlugTask.Location = new System.Drawing.Point(154, 114);
             this.cbbReadModePlugTask.Name = "cbbReadModePlugTask";
             this.cbbReadModePlugTask.Size = new System.Drawing.Size(291, 21);
             this.cbbReadModePlugTask.TabIndex = 7;
@@ -149,23 +151,23 @@
             "3-Enviar Documentos Perdidos E Excluir",
             "4-Excluir Registros Velhos",
             "5-Enviar Documentos Perdidos E Manter"});
-            this.cbbActionPlugTask.Location = new System.Drawing.Point(154, 85);
+            this.cbbActionPlugTask.Location = new System.Drawing.Point(154, 83);
             this.cbbActionPlugTask.Name = "cbbActionPlugTask";
             this.cbbActionPlugTask.Size = new System.Drawing.Size(291, 21);
             this.cbbActionPlugTask.TabIndex = 5;
             // 
             // txtLastDateExecutePlugTask
             // 
-            this.txtLastDateExecutePlugTask.Location = new System.Drawing.Point(154, 181);
+            this.txtLastDateExecutePlugTask.Location = new System.Drawing.Point(154, 207);
             this.txtLastDateExecutePlugTask.Mask = "00/00/0000 90:00:00";
             this.txtLastDateExecutePlugTask.Name = "txtLastDateExecutePlugTask";
             this.txtLastDateExecutePlugTask.Size = new System.Drawing.Size(115, 20);
-            this.txtLastDateExecutePlugTask.TabIndex = 11;
+            this.txtLastDateExecutePlugTask.TabIndex = 13;
             this.txtLastDateExecutePlugTask.ValidatingType = typeof(System.DateTime);
             // 
             // txtUnitCodePlugTask
             // 
-            this.txtUnitCodePlugTask.Location = new System.Drawing.Point(154, 149);
+            this.txtUnitCodePlugTask.Location = new System.Drawing.Point(154, 145);
             this.txtUnitCodePlugTask.Name = "txtUnitCodePlugTask";
             this.txtUnitCodePlugTask.Size = new System.Drawing.Size(53, 20);
             this.txtUnitCodePlugTask.TabIndex = 9;
@@ -173,7 +175,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 153);
+            this.label5.Location = new System.Drawing.Point(20, 149);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 13);
             this.label5.TabIndex = 8;
@@ -181,6 +183,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtGroupCodePlugTask);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.txtStartDatePlugTask);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.txtLastDateExecutePlugTask);
@@ -197,34 +201,50 @@
             this.groupBox1.Controls.Add(this.txtIdPlugTask);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(454, 247);
+            this.groupBox1.Size = new System.Drawing.Size(454, 272);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tarefa";
             // 
             // txtStartDatePlugTask
             // 
-            this.txtStartDatePlugTask.Location = new System.Drawing.Point(154, 213);
+            this.txtStartDatePlugTask.Location = new System.Drawing.Point(154, 238);
             this.txtStartDatePlugTask.Mask = "00/00/0000 90:00:00";
             this.txtStartDatePlugTask.Name = "txtStartDatePlugTask";
             this.txtStartDatePlugTask.Size = new System.Drawing.Size(115, 20);
-            this.txtStartDatePlugTask.TabIndex = 13;
+            this.txtStartDatePlugTask.TabIndex = 15;
             this.txtStartDatePlugTask.ValidatingType = typeof(System.DateTime);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(20, 217);
+            this.label7.Location = new System.Drawing.Point(20, 242);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(75, 13);
-            this.label7.TabIndex = 12;
+            this.label7.TabIndex = 14;
             this.label7.Text = "Data de Início";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(20, 180);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(87, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Código do Grupo";
+            // 
+            // txtGroupCodePlugTask
+            // 
+            this.txtGroupCodePlugTask.Location = new System.Drawing.Point(154, 176);
+            this.txtGroupCodePlugTask.Name = "txtGroupCodePlugTask";
+            this.txtGroupCodePlugTask.Size = new System.Drawing.Size(115, 20);
+            this.txtGroupCodePlugTask.TabIndex = 11;
             // 
             // FrmModalPlugTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 265);
+            this.ClientSize = new System.Drawing.Size(550, 291);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancelPlugTask);
             this.Controls.Add(this.btnRecordPlugTask);
@@ -260,5 +280,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.MaskedTextBox txtStartDatePlugTask;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtGroupCodePlugTask;
+        private System.Windows.Forms.Label label8;
     }
 }

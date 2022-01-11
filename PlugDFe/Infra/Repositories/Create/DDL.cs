@@ -102,6 +102,7 @@ namespace PlugDFe.Infra.Repositories.Create
                  "  ptask_action INTEGER DEFAULT NULL," +
                  "  ptask_readmode INTEGER DEFAULT NULL," +
                  "  ptask_unitcode varchar(25) DEFAULT NULL," +
+                 "  ptask_groupcode varchar(25) DEFAULT NULL," +
                  "  ptask_lastdateexecute datetime DEFAULT NULL," +
                  "  ptask_startdate datetime DEFAULT NULL" +
                  ")";
@@ -115,7 +116,8 @@ namespace PlugDFe.Infra.Repositories.Create
             SQL = "CREATE TABLE IF NOT EXISTS transferreddocuments (" +
                   " trdoc_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                   " trdoc_key varchar(50) NOT NULL," +
-                  " trdoc_ptask_id INTEGER NOT NULL," +
+                  " trdoc_unitcode varchar(25) DEFAULT NULL," +
+                  " trdoc_groupcode varchar(25) DEFAULT NULL," +
                   " trdoc_issuedate date DEFAULT NULL" +
                   ")";
 

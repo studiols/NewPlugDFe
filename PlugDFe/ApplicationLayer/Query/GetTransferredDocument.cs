@@ -16,19 +16,20 @@ namespace PlugDFe.ApplicationLayer.Query
             DatabaseConnection = databaseConnection;
         }
 
-        public List<TransferredDocument> GetLastDays(DateTime initialDate, DateTime finalDate, int idPlugTask)
+        public List<TransferredDocument> GetLastDays(DateTime initialDate, DateTime finalDate, string unitCode, string groupCode)
         {
             TransferredDocument transferredDocument;
             List<TransferredDocument> transferredDocuments = new List<TransferredDocument>();
             DataTable dt;
 
             SQL = "SELECT * FROM transferreddocuments " +
-                 "WHERE trdoc_issuedate between @InitialDate AND @FinalDate AND trdoc_ptask_id = @IdPlugTask";            
+                 "WHERE trdoc_issuedate between @InitialDate AND @FinalDate AND trdoc_unitcode = @UnitCode AND trdoc_groupcode = @GroupCode";            
 
             Dictionary<string, object> dBParameters = new Dictionary<string, object>();
             dBParameters.Add("@InitialDate", initialDate);
             dBParameters.Add("@FinalDate", finalDate);
-            dBParameters.Add("@IdPlugTask", idPlugTask);
+            dBParameters.Add("@UnitCode", unitCode);
+            dBParameters.Add("@GroupCode", groupCode);
 
             DatabaseConnection.OpenConnection();
             dt = DatabaseConnection.QueryPar(SQL, dBParameters);
@@ -40,7 +41,8 @@ namespace PlugDFe.ApplicationLayer.Query
             {
                 transferredDocument = new TransferredDocument(
                     dr["trdoc_key"].ToString(),
-                    Convert.ToInt32(dr["trdoc_ptask_id"]),
+                    dr["trdoc_unitcode"].ToString(),
+                    dr["trdoc_groupcode"].ToString(),
                     Convert.ToDateTime(dr["trdoc_issuedate"])
                 );
 
@@ -73,7 +75,8 @@ namespace PlugDFe.ApplicationLayer.Query
             {
                 transferredDocument = new TransferredDocument(
                     dr["trdoc_key"].ToString(),
-                    Convert.ToInt32(dr["trdoc_ptask_id"]),
+                    dr["trdoc_unitcode"].ToString(),
+                    dr["trdoc_groupcode"].ToString(),
                     Convert.ToDateTime(dr["trdoc_issuedate"])
                 );
 

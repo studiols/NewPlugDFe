@@ -21,7 +21,7 @@ namespace PlugDFe.ApplicationLayer.Services
 
             foreach (DataRow item in dt.Rows)
             {
-                xmlName = $"{path}/{item["chave"].ToString().Replace("CFe", "")}.XML";
+                xmlName = $"{path}/{item["chave"].ToString()}.XML";
                 xmlContent = item["xml"].ToString();
 
                 if (blobToBase64 == "S")

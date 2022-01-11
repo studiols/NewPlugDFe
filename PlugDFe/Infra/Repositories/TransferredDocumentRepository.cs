@@ -39,24 +39,26 @@ namespace PlugDFe.Infra.Repositories
             DatabaseConnection.OpenConnection();
             dt = DatabaseConnection.QueryPar(SQL, dBParameters);
             
-
             if (dt.Rows.Count == 0)
             {
                 SQL = "INSERT INTO transferreddocuments " +
                     "(" +
                         "trdoc_key," +
-                        "trdoc_ptask_id," +
+                        "trdoc_unitcode," +
+                        "trdoc_groupcode," +
                         "trdoc_issuedate" +
                     ") " +
                   "VALUES(" +
                     "@Key," +
-                    "@IdPlugTask," +
+                    "@UnitCode," +
+                    "@GroupCode," +
                     "@IssueDate" +
                   ")";
 
                 dBParameters = new Dictionary<string, object>();
                 dBParameters.Add("@Key", transferredDocument.Key);
-                dBParameters.Add("@IdPlugTask", transferredDocument.IdPlugTask);
+                dBParameters.Add("@UnitCode", transferredDocument.UnitCode);
+                dBParameters.Add("@GroupCode", transferredDocument.GroupCode);
                 dBParameters.Add("@IssueDate", FormatShortDate(transferredDocument.IssueDate));
 
                 DatabaseConnection.CommandPar(SQL, dBParameters);
@@ -69,14 +71,16 @@ namespace PlugDFe.Infra.Repositories
             SQL = "UPDATE transferreddocuments " +                    
                   "SET " +
                     "trdoc_key = @Key," +
-                    "trdoc_ptask_id = @IdPlugTask," +
+                    "trdoc_unitcode = @UniteCode," +
+                    "trdoc_groupcode = @GroupCode," +
                     "trdoc_issuedate = @IssueDate" +
                   "WHERE trdoc_id = @Id";
 
             Dictionary<string, object> dBParameters = new Dictionary<string, object>();
             dBParameters.Add("@Id", transferredDocument.Id);
             dBParameters.Add("@Key", transferredDocument.Key);
-            dBParameters.Add("@IdPlugTask", transferredDocument.IdPlugTask);
+            dBParameters.Add("@UnitCode", transferredDocument.UnitCode);
+            dBParameters.Add("@GroupCode", transferredDocument.GroupCode);
             dBParameters.Add("@IssueDate", FormatShortDate(transferredDocument.IssueDate));
 
             DatabaseConnection.OpenConnection();

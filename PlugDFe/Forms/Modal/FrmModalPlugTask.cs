@@ -58,6 +58,7 @@ namespace PlugDFe.Forms.Modal
                     cbbActionPlugTask.SelectedIndex = (Convert.ToInt32(plugTask.Action) - 1);
                     cbbReadModePlugTask.SelectedIndex = (Convert.ToInt32(plugTask.ReadMode) - 1);
                     txtUnitCodePlugTask.Text = plugTask.UnitCode;
+                    txtGroupCodePlugTask.Text = plugTask.GroupCode;
                     txtLastDateExecutePlugTask.Text = plugTask.LastExecuteDate.ToString();
                     txtStartDatePlugTask.Text = plugTask.StartDate.ToString();
                 }               
@@ -76,6 +77,7 @@ namespace PlugDFe.Forms.Modal
                   InputValidator.SplitOption(cbbActionPlugTask.SelectedItem.ToString().Split('-')[0]),
                   InputValidator.SplitOption(cbbReadModePlugTask.SelectedItem.ToString().Split('-')[0]),
                   txtUnitCodePlugTask.Text,
+                  txtGroupCodePlugTask.Text,
                   Convert.ToDateTime(txtLastDateExecutePlugTask.Text),
                   Convert.ToDateTime(txtStartDatePlugTask.Text)
                );
@@ -89,6 +91,7 @@ namespace PlugDFe.Forms.Modal
                     InputValidator.SplitOption(cbbActionPlugTask.SelectedItem.ToString().Split('-')[0]),
                     InputValidator.SplitOption(cbbReadModePlugTask.SelectedItem.ToString().Split('-')[0]),
                     txtUnitCodePlugTask.Text,
+                    txtGroupCodePlugTask.Text,
                     Convert.ToDateTime(txtLastDateExecutePlugTask.Text),
                     Convert.ToDateTime(txtStartDatePlugTask.Text)
                );
@@ -105,6 +108,7 @@ namespace PlugDFe.Forms.Modal
             if (cbbActionPlugTask.SelectedItem == null) { errors.Add("A Ação executada deve ser preenchida!"); }
             if (cbbReadModePlugTask.SelectedItem == null) { errors.Add("O Modo de leitura deve ser preenchido!"); }
             if (string.IsNullOrEmpty(txtUnitCodePlugTask.Text)) { errors.Add("O Código da Unidade deve ser preenchido!"); }
+            if (string.IsNullOrEmpty(txtGroupCodePlugTask.Text)) { errors.Add("O Código da Unidade deve ser preenchido!"); }
             if (!txtLastDateExecutePlugTask.MaskCompleted) { errors.Add("A Data da Ultima Execução deve ser preenchida corretamente!"); }
             if (!txtStartDatePlugTask.MaskCompleted) { errors.Add("A Data de Início deve ser preenchida corretamente!"); }
 

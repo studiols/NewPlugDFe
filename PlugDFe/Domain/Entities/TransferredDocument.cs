@@ -4,16 +4,18 @@ namespace PlugDFe.Domain.Entities
 {
     public class TransferredDocument
     {
-        public TransferredDocument(string key, int idPlugTask, DateTime issueDate)
+        public TransferredDocument(string key, string unitCode, string groupCode, DateTime issueDate)
         {
             Key = key;
-            IdPlugTask = idPlugTask;
+            UnitCode = unitCode;
+            GroupCode = groupCode;
             IssueDate = issueDate;
         }
 
         public int Id { get; private set; }
         public string Key { get; private set; }
-        public int IdPlugTask { get; private set; }
+        public string UnitCode { get; private set; }
+        public string GroupCode { get; private set; }
         public DateTime IssueDate { get; private set; }
 
         public void SetId(int id)
@@ -21,9 +23,14 @@ namespace PlugDFe.Domain.Entities
             Id = id;
         }
 
-        public void SetIdPlugTask(int idPlugTask)
+        public void SetUnitCode(string unitCode)
         {
-            IdPlugTask = idPlugTask;
+            UnitCode = unitCode;
+        }
+
+        public void SetGroupCode(string groupCode)
+        {
+            GroupCode = groupCode;
         }
     }
 }

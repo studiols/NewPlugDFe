@@ -13,13 +13,14 @@ namespace PlugDFe.Infra.Repositories
        
         public void Save(PlugTask plugTask)
         {            
-            SQL = "INSERT INTO plugtasks (ptask_paddr_id, ptask_connv_id, ptask_action, ptask_readmode, ptask_unitcode, ptask_lastdateexecute, ptask_startdate) " +
+            SQL = "INSERT INTO plugtasks (ptask_paddr_id, ptask_connv_id, ptask_action, ptask_readmode, ptask_unitcode, ptask_groupcode, ptask_lastdateexecute, ptask_startdate) " +
                   "VALUES(" +                  
                     "@Address, " +
                     "@IdConnectViewer, " +
                     "@Action, " +
                     "@ReadMode, " +
                     "@UnitCode, " +
+                    "@GroupCode, " +
                     "@LastExecuteDate, " +
                     "@StartDate" +
                   ")";
@@ -31,6 +32,7 @@ namespace PlugDFe.Infra.Repositories
                 { "@Action", (int)plugTask.Action },
                 { "@ReadMode", (int)plugTask.ReadMode },
                 { "@UnitCode", plugTask.UnitCode },
+                { "@GroupCode", plugTask.GroupCode },
                 { "@LastExecuteDate", FormatFullDate(plugTask.LastExecuteDate) },
                 { "@StartDate", FormatFullDate(plugTask.StartDate) }
             };
@@ -49,6 +51,7 @@ namespace PlugDFe.Infra.Repositories
                     "ptask_action = @Action, " +
                     "ptask_readmode = @ReadMode, " +
                     "ptask_unitcode = @UnitCode, " +
+                    "ptask_groupcode = @GroupCode, " +
                     "ptask_lastdateexecute = @LastExecuteDate, " +
                     "ptask_startdate = @StartDate " +
                   "WHERE ptask_id = @Id";
@@ -60,6 +63,7 @@ namespace PlugDFe.Infra.Repositories
             dBParameters.Add("@Action", (int)plugTask.Action);
             dBParameters.Add("@ReadMode", (int)plugTask.ReadMode);
             dBParameters.Add("@UnitCode", plugTask.UnitCode);
+            dBParameters.Add("@GroupCode", plugTask.GroupCode);
             dBParameters.Add("@LastExecuteDate", FormatFullDate(plugTask.LastExecuteDate));
             dBParameters.Add("@StartDate", FormatFullDate(plugTask.StartDate));
 

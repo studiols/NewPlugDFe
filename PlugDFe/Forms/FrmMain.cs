@@ -154,7 +154,7 @@ namespace PlugDFe.Forms
                             plugAddress,
                             plugTask,
                             connectViewer,
-                            getTransferredDocument.GetLastDays(dateTime.AddDays(-30), dateTime.AddDays(1), plugTask.Id),
+                            getTransferredDocument.GetLastDays(dateTime.AddDays(-30), dateTime.AddDays(1), plugTask.UnitCode, plugTask.GroupCode),
                             communicationPlatform,
                             databaseConnection
                         );

@@ -43,6 +43,7 @@ namespace PlugDFe.ApplicationLayer.Query
                 plugTask.SetId(Convert.ToInt32(dr["ptask_id"]));
                 plugTask.SetIdConnectViewer(Convert.ToInt32(dr["ptask_connv_id"]));
                 plugTask.SetUnitCode(dr["ptask_unitcode"].ToString());
+                plugTask.SetGroupCode(dr["ptask_groupcode"].ToString());
 
                 plugTasks.Add(plugTask);
             }
@@ -74,6 +75,7 @@ namespace PlugDFe.ApplicationLayer.Query
             plugTask.SetId(Convert.ToInt32(dt.Rows[0]["ptask_id"]));
             plugTask.SetIdConnectViewer(Convert.ToInt32(dt.Rows[0]["ptask_connv_id"]));
             plugTask.SetUnitCode(dt.Rows[0]["ptask_unitcode"].ToString());
+            plugTask.SetGroupCode(dt.Rows[0]["ptask_groupcode"].ToString());
 
             return plugTask;
         }

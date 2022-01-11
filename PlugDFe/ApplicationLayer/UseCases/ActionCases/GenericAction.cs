@@ -95,13 +95,13 @@ namespace PlugDFe.ApplicationLayer.UseCases.ActionCases
             for (int i = 0; i < zipFilesOutput.ValidFilesAfterFilter.Count; i++)
             {
                 // Salvo tudo, pois não sei quais foram rejeitados
-                TransferredDocumentRepository.SaveIfNotExists(new TransferredDocument(zipFilesOutput.ValidFilesAfterFilter[i].Name.Replace(".XML", ""), PlugTask.Id, DateTime.Now));
+                TransferredDocumentRepository.SaveIfNotExists(new TransferredDocument(zipFilesOutput.ValidFilesAfterFilter[i].Name.Replace(".XML", "").Replace(".xml", ""), PlugTask.UnitCode, PlugTask.GroupCode, DateTime.Now));
             }            
 
             HandlerFiles.DeleteRemainingTemporaryZipFiles(zipFilesOutput.ZipPaths);            
 
             return zipFilesOutput.ValidFilesAfterFilter;
-        }        
+        }
 
         public void RedundancyHandleLostDocuments()
         {
@@ -137,7 +137,7 @@ namespace PlugDFe.ApplicationLayer.UseCases.ActionCases
             foreach (TransferredDocument document in TransferredDocuments)
             {
                 listOfTransferredKeys.Add("'" + document.Key + "'");
-            }            
+            }
 
             executeQueryInput = new ExecuteQueryInput(
                 ConnectViewer.Type,
@@ -178,7 +178,7 @@ namespace PlugDFe.ApplicationLayer.UseCases.ActionCases
                 join tk in listOfTransferredKeys on fk equals tk into merge
                 from tk in merge.DefaultIfEmpty()
                 select new KeyComparison(fk, tk == null ? "(Não Encontrada)" : tk);
-                
+
                 List<KeyComparison> listOfDivergences = divergences.ToList();
 
                 foreach (KeyComparison keyComparison in listOfDivergences)

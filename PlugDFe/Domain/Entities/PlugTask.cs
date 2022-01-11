@@ -22,6 +22,7 @@ namespace PlugDFe.Domain.Entities
         public EReadMode ReadMode { get; private set; }
         public EAction Action { get; private set; }
         public string UnitCode { get; private set; }
+        public string GroupCode { get; private set; }
         public DateTime LastExecuteDate { get; private set; }
         public DateTime StartDate { get; private set; }
 
@@ -79,6 +80,11 @@ namespace PlugDFe.Domain.Entities
         public void SetUnitCode(string unitCode)
         {
             UnitCode = unitCode;
+        }
+
+        public void SetGroupCode(string groupCode)
+        {
+            GroupCode = groupCode;
         }
     }
 }
