@@ -53,6 +53,8 @@ namespace PlugDFe.Forms.Modal
                    chkConnectViewerBase64ToString.Checked ? "S" : "N",
                    chkConnectViewerCompressedBase64ToString.Checked ? "S" : "N"
                );
+
+                Close();
             }
             else
             {
@@ -146,6 +148,8 @@ namespace PlugDFe.Forms.Modal
             {
                 string msg = "[CURRENT_DATE]\t\t Data Corrente (Formato 2021-01-01)\n" +
                              "[CURRENT_DATE_STRING]\t Data Corrente (Formato 20210101)\n" +
+                             "[DATA_ATUAL]\t Data Atual (Formato 01/01/2022)\n" +
+                             "[DATA_ANTERIOR]\t Data Anterior (Formato 01/01/2022)\n" +
                              "[UNIDADE]\t\t Unidade passada no argumento\n" +
                              "[KEYS]\t\t\t Chaves encontradas\n" +
                              "[INITIAL_DATE]\t\t Data Inicial\n" +
